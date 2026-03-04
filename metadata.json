@@ -1,0 +1,5 @@
+{
+  "name": "Genshin Gacha Simulator",
+  "description": "A high-performance Monte-Carlo simulator for Genshin Impact gacha probabilities.",
+  "requestFramePermissions": []
+}
