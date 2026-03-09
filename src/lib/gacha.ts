@@ -12,6 +12,7 @@ export interface SimulationConfig {
   initialCharPity: number;
   initialWeaponPity: number;
   isCharGuaranteed: boolean;
+  crCounter: number;
   sequence: Goal[];
 }
 
@@ -47,11 +48,8 @@ export const runSimulationBatch = (
     let charPity = config.initialCharPity;
     let weaponPity = config.initialWeaponPity;
     let isCharGuaranteed = config.isCharGuaranteed;
-    let fatePoints = 0; // Weapon banner fate points reset for each simulation run? 
-                        // Prompt implies "Constructeur de Chemin Personnalisé" starts from current state.
-                        // But usually weapon fate points don't carry over banners. 
-                        // However, for a simulation of "I have X wishes, can I get Y?", we assume 0 fate points start unless specified.
-                        // The prompt doesn't ask for initial fate points input, so assume 0.
+    let crCounter = config.crCounter;
+    let fatePoints = 0; 
 
     let wishesSpent = 0;
 
@@ -71,15 +69,25 @@ export const runSimulationBatch = (
             charPity = 0;
             if (isCharGuaranteed) {
               goalMet = true;
-              isCharGuaranteed = false; // Reset to 50/50 (55/45)
+              isCharGuaranteed = false;
+              // crCounter NE CHANGE PAS
             } else {
-              // 55/45 logic (Capturing Radiance)
-              if (Math.random() < 0.55) {
+              // 50/50 logic (Capturing Radiance)
+              let winProb = 0.5;
+              if (crCounter === 0 || crCounter === 1) winProb = 0.50;
+              else if (crCounter === 2) winProb = 0.75;
+              else if (crCounter >= 3) winProb = 1.00;
+
+              if (Math.random() < winProb) {
+                // Won 50/50
                 goalMet = true;
                 isCharGuaranteed = false;
+                crCounter = 0;
               } else {
+                // Lost 50/50
                 goalMet = false;
                 isCharGuaranteed = true;
+                crCounter++;
               }
             }
           }

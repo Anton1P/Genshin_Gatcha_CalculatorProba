@@ -87,7 +87,7 @@ export function PathBuilder({ sequence, setSequence }: PathBuilderProps) {
         </div>
         <button
           onClick={clearSequence}
-          className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 px-2 py-1 rounded hover:bg-red-950/30 transition-colors"
+          className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 px-2 py-1 rounded hover:bg-red-950/30 transition-colors cursor-pointer"
         >
           <Trash2 className="w-3 h-3" />
           Tout effacer
@@ -118,7 +118,7 @@ export function PathBuilder({ sequence, setSequence }: PathBuilderProps) {
             
             <button
               onClick={() => removeGoal(index)}
-              className="ml-2 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-red-400 transition-opacity"
+              className="ml-2 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-red-400 transition-opacity cursor-pointer"
             >
               <Trash2 className="w-3 h-3" />
             </button>
@@ -131,7 +131,7 @@ export function PathBuilder({ sequence, setSequence }: PathBuilderProps) {
         <button
           onClick={() => addGoal('character')}
           disabled={sequence.filter(g => g.type === 'character').length >= 7}
-          className="flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-lg font-medium transition-all active:scale-95"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-lg font-medium transition-all active:scale-95 cursor-pointer disabled:cursor-not-allowed"
         >
           <Plus className="w-4 h-4" />
           Ajouter Personnage (C)
@@ -139,7 +139,7 @@ export function PathBuilder({ sequence, setSequence }: PathBuilderProps) {
         <button
           onClick={() => addGoal('weapon')}
           disabled={sequence.filter(g => g.type === 'weapon').length >= 5}
-          className="flex items-center justify-center gap-2 px-4 py-3 bg-fuchsia-600 hover:bg-fuchsia-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-lg font-medium transition-all active:scale-95"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-fuchsia-600 hover:bg-fuchsia-500 disabled:bg-slate-800 disabled:text-slate-500 text-white rounded-lg font-medium transition-all active:scale-95 cursor-pointer disabled:cursor-not-allowed"
         >
           <Plus className="w-4 h-4" />
           Ajouter Arme Cible (R)

@@ -6,7 +6,7 @@ Un simulateur de probabilités ultra-performant pour le système de vœux (gacha
 
 - **Méthode de Monte-Carlo** : Exécute 10 000 itérations pour garantir une précision statistique fiable.
 - **Règles 5.0+ Intégrées** :
-  - **Personnages** : Intègre la mécanique d'"Éclat Capturé" (Capturing Radiance) qui fait passer le 50/50 à un taux de réussite de 55/45.
+  - **Personnages** : Intègre la mécanique d'"Éclat Capturé" (Capturing Radiance) avec son système de pity cachée basé sur l'historique des défaites aux 50/50.
   - **Armes** : Intègre le nouveau Chemin de l'Incarnation réduit à 1 point de destin (Fate Point) maximum.
 - **Chemin Personnalisé (Custom Path)** : Permet de simuler une séquence précise d'objectifs (ex: C0 -> R1 -> C1 -> C2).
 - **Calcul du Cashback** : Calcule automatiquement les vœux effectifs en incluant un retour moyen de 9% via les Astéries.
@@ -40,5 +40,8 @@ Gère l'état global de l'application et la boucle de simulation.
 
 ## 🧮 Détails Mathématiques
 
-- **Bannière Personnage** : Taux de base 0.6%. Soft pity à 74. Hard pity à 90. En cas de perte du 50/50, le prochain est garanti. Si non garanti, les chances sont de 55% (Succès) / 45% (Échec).
+- **Bannière Personnage** : Taux de base 0.6%. Soft pity à 74. Hard pity à 90. En cas de perte du 50/50, le prochain est garanti. Si non garanti, les chances de gagner le 50/50 dépendent de l'historique de l'Éclat Capturé :
+  - 0 ou 1 défaite consécutive : **50%** de chances.
+  - 2 défaites consécutives : **75%** de chances.
+  - 3 défaites consécutives : **100%** de chances (Éclat Capturé garanti).
 - **Bannière Arme** : Taux de base 0.7%. Soft pity à 63. Hard pity à 80. 75% de chances d'obtenir une arme de la bannière, puis 50% d'obtenir l'arme ciblée (soit 37.5% de base). Si l'arme obtenue n'est pas la cible, le point de destin passe à 1, garantissant l'arme ciblée au prochain 5★.

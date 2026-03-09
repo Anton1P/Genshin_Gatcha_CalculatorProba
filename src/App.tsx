@@ -12,6 +12,7 @@ export default function App() {
   const [charPity, setCharPity] = useState(0);
   const [weaponPity, setWeaponPity] = useState(0);
   const [isCharGuaranteed, setIsCharGuaranteed] = useState(false);
+  const [crCounter, setCrCounter] = useState(0);
   
   // --- Sequence State ---
   const [sequence, setSequence] = useState<Goal[]>([]);
@@ -69,6 +70,7 @@ export default function App() {
         initialCharPity: charPity,
         initialWeaponPity: weaponPity,
         isCharGuaranteed: isCharGuaranteed,
+        crCounter: crCounter,
         sequence: sequence,
       };
 
@@ -101,7 +103,7 @@ export default function App() {
     };
 
     simulationRef.current.animationFrameId = requestAnimationFrame(processBatch);
-  }, [sequence, effectiveWishes, charPity, weaponPity, isCharGuaranteed, isRunning]);
+  }, [sequence, effectiveWishes, charPity, weaponPity, isCharGuaranteed, crCounter, isRunning]);
 
   const stopSimulation = useCallback(() => {
     if (simulationRef.current.animationFrameId) {
@@ -141,6 +143,8 @@ export default function App() {
             setWeaponPity={setWeaponPity}
             isCharGuaranteed={isCharGuaranteed}
             setIsCharGuaranteed={setIsCharGuaranteed}
+            crCounter={crCounter}
+            setCrCounter={setCrCounter}
             effectiveWishes={effectiveWishes}
           />
 
@@ -159,7 +163,7 @@ export default function App() {
               <button
                 onClick={startSimulation}
                 disabled={sequence.length === 0}
-                className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-white transition-all duration-200 bg-indigo-600 rounded-full hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5"
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-white transition-all duration-200 bg-indigo-600 rounded-full hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 cursor-pointer"
               >
                 <Play className="w-5 h-5 fill-current" />
                 Lancer la Simulation
@@ -167,7 +171,7 @@ export default function App() {
             ) : (
               <button
                 onClick={stopSimulation}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-slate-200 transition-all duration-200 bg-slate-800 rounded-full hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-600"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-slate-200 transition-all duration-200 bg-slate-800 rounded-full hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-600 cursor-pointer"
               >
                 <RotateCcw className="w-5 h-5" />
                 Arrêter
